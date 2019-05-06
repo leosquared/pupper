@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
+<body>
+
+<script>
+$(document).ready(function(){
+
+	$('#refresh').click(function() {
+	    location.reload();
+	});
+
+	$.ajax({ 
+		url: "https://dog.ceo/api/breeds/image/random",
+		type: "GET",
+    context: document.body,
+    dataType: 'JSON',
+    beforeSend: function(){
+			//this will be triggered before sending the ajax request
+			console.log('Sending AJAX Request...');
+		},
+    success: function(data){
+    	// console.log(data)
+    	newimg = data.message
+			$("#doggo").attr("src", newimg);
+  }});
+});
+
+</script>
+<h3>Here is a random picture of a Doggo!</h3>
+<img src="" id="doggo" alt="Random Doggo"> <br>
+<button type="button" id="refresh">Give me another Doggo!</button> <br> <br>
+
+<p> This is an app hosted by Heroku and deployed via Docker. <br>
+	See source code <a href="https://github.com/leosquared/pupper" target="_blank">here</a>
+</p>
+
+</body>
+</html>
